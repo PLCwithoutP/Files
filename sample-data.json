@@ -1,0 +1,98 @@
+{
+  "projects": [
+    {
+      "id": "id_sample001",
+      "name": "Learn JavaScript",
+      "createdAt": "2025-12-01T10:00:00.000Z",
+      "subtasks": [
+        {
+          "id": "id_subtask001",
+          "name": "Variables and Data Types",
+          "totalSessions": 4,
+          "completedSessions": 4,
+          "isCompleted": true
+        },
+        {
+          "id": "id_subtask002",
+          "name": "Functions and Scope",
+          "totalSessions": 6,
+          "completedSessions": 3,
+          "isCompleted": false
+        },
+        {
+          "id": "id_subtask003",
+          "name": "DOM Manipulation",
+          "totalSessions": 8,
+          "completedSessions": 0,
+          "isCompleted": false
+        }
+      ]
+    },
+    {
+      "id": "id_sample002",
+      "name": "Build Portfolio Website",
+      "createdAt": "2025-12-02T14:30:00.000Z",
+      "subtasks": [
+        {
+          "id": "id_subtask004",
+          "name": "Design wireframes",
+          "totalSessions": 3,
+          "completedSessions": 3,
+          "isCompleted": true
+        },
+        {
+          "id": "id_subtask005",
+          "name": "HTML structure",
+          "totalSessions": 4,
+          "completedSessions": 2,
+          "isCompleted": false
+        },
+        {
+          "id": "id_subtask006",
+          "name": "CSS styling",
+          "totalSessions": 6,
+          "completedSessions": 0,
+          "isCompleted": false
+        },
+        {
+          "id": "id_subtask007",
+          "name": "JavaScript interactions",
+          "totalSessions": 5,
+          "completedSessions": 0,
+          "isCompleted": false
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "workDuration": 25,
+    "shortBreakDuration": 5,
+    "longBreakDuration": 15,
+    "sessionsBeforeLongBreak": 4
+  },
+  "stats": {
+    "totalWorkTime": 18000,
+    "totalBreakTime": 3600
+  },
+  "appSessions": [
+    {
+      "date": "01Dec25",
+      "duration": "02:30:15"
+    },
+    {
+      "date": "02Dec25",
+      "duration": "01:45:30"
+    },
+    {
+      "date": "03Dec25",
+      "duration": "03:12:45"
+    }
+  ],
+  "summary": {
+    "totalProjects": 2,
+    "completedSubtasks": 2,
+    "incompleteSubtasks": 5,
+    "totalWorkTime": "05:00:00",
+    "totalBreakTime": "01:00:00"
+  }
+}

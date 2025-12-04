@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro Focus - Furkan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="mode-pomodoro">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Projects</h2>
+            <button class="btn-add-project" id="btnAddProject" title="Add New Project">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="projects-list" id="projectsList">
+            <!-- Projects will be rendered here -->
+        </div>
+        <div class="sidebar-footer">
+            <button class="btn-io" id="btnImport">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Import
+            </button>
+            <button class="btn-io" id="btnExport">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="17 8 12 3 7 8"></polyline>
+                    <line x1="12" y1="3" x2="12" y2="15"></line>
+                </svg>
+                Export
+            </button>
+        </div>
+        <input type="file" id="importInput" accept=".json" style="display: none;">
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header -->
+        <header class="header">
+            <div class="welcome-section">
+                <h1 class="welcome-message">Welcome Back, <span class="user-name">Furkan</span></h1>
+                <p class="current-date" id="currentDate"></p>
+            </div>
+            <button class="btn-toggle-sidebar" id="btnToggleSidebar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Timer Section -->
+        <section class="timer-section">
+            <div class="mode-tabs">
+                <button class="mode-tab active" data-mode="pomodoro">Pomodoro</button>
+                <button class="mode-tab" data-mode="shortBreak">Short Break</button>
+                <button class="mode-tab" data-mode="longBreak">Long Break</button>
+            </div>
+            <div class="timer-display">
+                <span class="timer-digits" id="timerDisplay">25:00</span>
+            </div>
+            <div class="timer-controls">
+                <button class="btn-timer-main" id="btnStartPause">START</button>
+                <button class="btn-timer-reset" id="btnReset" title="Reset Timer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="1 4 1 10 7 10"></polyline>
+                        <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="session-indicator">
+                <span id="sessionCount">Session 1 of 4</span>
+            </div>
+            <div class="active-task-display" id="activeTaskDisplay">
+                <p class="active-project-name" id="activeProjectName">No project selected</p>
+                <p class="active-subtask-name" id="activeSubtaskName">Select a subtask to begin</p>
+            </div>
+        </section>
+
+        <!-- Project Details Section -->
+        <section class="project-details-section" id="projectDetailsSection">
+            <div class="project-details-header">
+                <h2 class="project-title" id="projectTitle">Select a Project</h2>
+                <div class="project-time-stats" id="projectTimeStats">
+                    <div class="time-stat">
+                        <span class="time-stat-label">Time Spent</span>
+                        <span class="time-stat-value" id="timeSpent">00:00:00</span>
+                    </div>
+                    <div class="time-stat">
+                        <span class="time-stat-label">Time Remaining</span>
+                        <span class="time-stat-value" id="timeRemaining">00:00:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="subtasks-container" id="subtasksContainer">
+                <p class="no-project-message">Select a project from the sidebar to view its details</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Project Modal -->
+    <div class="modal-overlay" id="addProjectModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Create New Project</h2>
+                <button class="btn-close-modal" id="btnCloseModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="projectName">Project Name</label>
+                    <input type="text" id="projectName" placeholder="Enter project name...">
+                </div>
+                <div class="subtasks-form-section">
+                    <div class="subtasks-header">
+                        <label>Subtasks</label>
+                        <button class="btn-add-subtask" id="btnAddSubtask">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Add Subtask
+                        </button>
+                    </div>
+                    <div class="subtasks-form-list" id="subtasksFormList">
+                        <!-- Subtask form items will be added here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="btnCancelProject">Cancel</button>
+                <button class="btn-create" id="btnCreateProject">Create Project</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Session Timer (bottom right) -->
+    <div class="app-session-timer" id="appSessionTimer">
+        <span class="session-timer-label">Session Time</span>
+        <span class="session-timer-value" id="appSessionTime">00:00:00</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
